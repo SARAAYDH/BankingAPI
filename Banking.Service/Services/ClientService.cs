@@ -35,19 +35,6 @@ public class ClientService: IClientService
             return isValidMobileNumber;
         }
         var newClient = _mapper.Map<Client>(client);
-        //////
-        //// Ensure at least one account exists
-        //if (newClient.Accounts == null || !newClient.Accounts.Any())
-        //{
-        //    // Create a default account if none exist
-        //    var defaultAccount = new Account
-        //    {
-        //        Balance = 0, // Initial balance can be 0 or a default value
-        //        Client = newClient
-        //    };
-
-        //    newClient.Accounts = new List<Account> { defaultAccount };  // Initialize accounts collection and add account
-        //}
         HandleClientAccounts(client, newClient);
         await _clientRepository.AddAsync(newClient, cancellationToken);
         return  Result.Success();
@@ -88,10 +75,10 @@ public class ClientService: IClientService
             // Create a default account if no accounts are provided
             var defaultAccount = new Account
             {
-                Balance = 0, // Initial balance can be set to 0 or any default value
-                Client = newClient // Link the account to the new client
+                Balance = 0, 
+                Client = newClient 
             };
-            newClient.Accounts.Add(defaultAccount); // Add the default account to the new client
+            newClient.Accounts.Add(defaultAccount); 
         }
         else
         {
@@ -101,9 +88,9 @@ public class ClientService: IClientService
                 var account = new Account
                 {
                     Balance = accountDto.Balance,
-                    Client = newClient // Link the account to the new client
+                    Client = newClient 
                 };
-                newClient.Accounts.Add(account); // Add the account to the new client
+                newClient.Accounts.Add(account); 
             }
         }
     }
