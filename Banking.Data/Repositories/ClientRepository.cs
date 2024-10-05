@@ -33,7 +33,7 @@ public class ClientRepository : IClientRepository
 
     public async Task<Client?> FindByEmailOrPersonalIdAsync(string email, string personalId, CancellationToken cancellationToken = default)
     {
-       return await _context.Clients.AsNoTracking().FirstOrDefaultAsync(c => c.Email == email || c.PersonalId == personalId, cancellationToken); ;
+       return await _context.Clients.AsNoTracking().FirstOrDefaultAsync(c => c.Email == email || c.PersonalId == personalId, cancellationToken);
     }
 
     public async Task<IEnumerable<Client>> GetAllAsync(CancellationToken cancellationToken = default)
@@ -43,7 +43,7 @@ public class ClientRepository : IClientRepository
 
     public async Task<Client?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        return await _context.Clients.AsNoTracking().Where(c => !c.IsDeleted.HasValue || !c.IsDeleted.Value).FirstOrDefaultAsync(c => c.Id == id, cancellationToken); ;
+        return await _context.Clients.AsNoTracking().Where(c => !c.IsDeleted.HasValue || !c.IsDeleted.Value).FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
     }
 
     public async Task<IQueryable<Client>> GetAllAsQueryable(CancellationToken cancellationToken)
